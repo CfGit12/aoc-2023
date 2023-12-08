@@ -12,7 +12,7 @@ fun main() {
 private fun part1() = doIt(jacksWild = false)
 private fun part2() = doIt(jacksWild = true)
 
-fun doIt(jacksWild: Boolean) =
+private fun doIt(jacksWild: Boolean) =
     parseHands(jacksWild)
         .sorted()
         .mapIndexed { index, handAndBid -> handAndBid.bid.toLong() * (index + 1) }
