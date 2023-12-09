@@ -9,21 +9,15 @@ fun main() {
 }
 
 private fun part1() =
-    sequences.sumOf { findTerm(NextOrPreceding.NEXT, it) }
+    sequences.sumOf { findTerm(it) }
 
 private fun part2() =
-    sequences.sumOf { findTerm(NextOrPreceding.PRECEDING, it) }
+    sequences.map { it.reversed() }.sumOf { findTerm(it) }
 
-private fun findTerm(nextOrPreceding: NextOrPreceding, sequence: List<Int>): Int {
+private fun findTerm(sequence: List<Int>): Int {
     val allSequences = mutableListOf(sequence)
     while (!allSequences.last().allEqual()) {
         allSequences.add(allSequences.last().windowed(2).map { it[1] - it[0] })
     }
-    return if (nextOrPreceding == NextOrPreceding.NEXT) {
-        allSequences.sumOf { it.last() }
-    } else {
-        allSequences.reversed().fold(0) { acc, s -> s.first() - acc }
-    }
+    return allSequences.sumOf { it.last() }
 }
-
-enum class NextOrPreceding { NEXT, PRECEDING }
