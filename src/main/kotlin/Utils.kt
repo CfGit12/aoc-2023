@@ -33,3 +33,5 @@ fun lcm(a: Long, b: Long): Long {
     }
     return maxLcm
 }
+
+fun <T> List<T>.allEqual() = all { it == this[0] }
