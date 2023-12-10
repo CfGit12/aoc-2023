@@ -4,9 +4,36 @@ fun readFileAsLines(name: String) = readFile(name).lines()
 
 data class Point2D(val x: Int, val y: Int)
 
+operator fun Point2D.plus(direction: Direction) =
+    when (direction) {
+        Direction.NORTH -> copy(y = y - 1)
+        Direction.EAST -> copy(x = x + 1)
+        Direction.SOUTH -> copy(y = y + 1)
+        Direction.WEST -> copy(x = x - 1)
+    }
+
+enum class Direction { NORTH, EAST, SOUTH, WEST }
+
+fun Direction.opposite() =
+    when (this) {
+        Direction.NORTH -> Direction.SOUTH
+        Direction.EAST -> Direction.WEST
+        Direction.SOUTH -> Direction.NORTH
+        Direction.WEST -> Direction.EAST
+    }
+
 class Grid<T>(private val points: Map<Point2D, T>) : Map<Point2D, T> by points {
     private val highestX = points.keys.maxOf { it.x }
     private val highestY = points.keys.maxOf { it.y }
+
+    fun toStringWithOnly(restrictedPoints: Set<Point2D>) = buildString {
+        for (y in 0..highestY) {
+            for (x in 0..highestX) {
+                if (Point2D(x, y) in restrictedPoints) append(points[Point2D(x, y)]) else append(" ")
+            }
+            if (y < highestY) appendLine()
+        }
+    }
 
     override fun toString() = buildString {
         for (y in 0..highestY) {
@@ -15,6 +42,19 @@ class Grid<T>(private val points: Map<Point2D, T>) : Map<Point2D, T> by points {
             }
             if (y < highestY) appendLine()
         }
+    }
+
+    companion object {
+        fun <T> fromLines(lines: List<String>, transformFn: (Char) -> T): Grid<T> =
+            Grid(
+                buildMap {
+                    lines.mapIndexed { y, line ->
+                        line.mapIndexed { x, c ->
+                            put(Point2D(x, y), transformFn(c))
+                        }
+                    }
+                }
+            )
     }
 }
 
