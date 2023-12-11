@@ -33,7 +33,7 @@ private fun getLoopDirections(): List<Direction> {
         currentPosition += currentDirection
         val gridLocation = pipeGrid[currentPosition]
         if (gridLocation is Pipe) {
-            currentDirection = (pipeGrid[currentPosition] as Pipe).exitsFrom(currentDirection)
+            currentDirection = gridLocation.exitsFrom(currentDirection)
         }
         steps++
     } while (pipeGrid[currentPosition] != Start)

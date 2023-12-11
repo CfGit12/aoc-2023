@@ -45,6 +45,9 @@ class Grid<T>(private val points: Map<Point2D, T>) : Map<Point2D, T> by points {
     }
 
     companion object {
+        fun <T> fromFile(fileName: String, transformFn: (Char) -> T) =
+            fromLines(readFileAsLines(fileName), transformFn)
+
         fun <T> fromLines(lines: List<String>, transformFn: (Char) -> T): Grid<T> =
             Grid(
                 buildMap {
@@ -75,3 +78,6 @@ fun lcm(a: Long, b: Long): Long {
 }
 
 fun <T> List<T>.allEqual() = all { it == this[0] }
+
+infix fun Int.between(other: Int): IntProgression =
+    if (this <= other) this..other else this downTo other
