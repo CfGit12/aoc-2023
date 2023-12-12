@@ -28,3 +28,5 @@ E
 src/main/kotlin/10.kt,4/1/410f7dc524ab7991780638b50643b6d6904e7c99
 E
 src/main/kotlin/11.kt,c/2/c244f9099b2f52c6497139ece1e4d0c61111fef0
+E
+src/main/kotlin/12.kt,6/5/654974788b4b60d378193b5ea538dacce19bb5e8
