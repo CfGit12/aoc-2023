@@ -81,3 +81,13 @@ fun <T> List<T>.allEqual() = all { it == this[0] }
 
 infix fun Int.between(other: Int): IntProgression =
     if (this <= other) this..other else this downTo other
+
+fun List<String>.transposed(): List<String> {
+    val cols = this[0].length
+    val rows = this.size
+    return List(cols) { j ->
+        List(rows) { i ->
+            this[i][j]
+        }.joinToString("")
+    }
+}

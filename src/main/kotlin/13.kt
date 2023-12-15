@@ -33,14 +33,3 @@ private fun List<String>.getReflectionIndex(differences: Int) =
 
 private fun noOfDifferencesBetween(s1: String, s2: String) =
     s1.zip(s2).count { it.first != it.second }
-
-
-private fun List<String>.transposed(): List<String> {
-    val cols = this[0].length
-    val rows = this.size
-    return List(cols) { j ->
-        List(rows) { i ->
-            this[i][j]
-        }.joinToString("")
-    }
-}
