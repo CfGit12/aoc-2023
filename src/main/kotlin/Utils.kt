@@ -23,8 +23,11 @@ fun Direction.opposite() =
     }
 
 class Grid<T>(private val points: Map<Point2D, T>) : Map<Point2D, T> by points {
-    private val highestX = points.keys.maxOf { it.x }
-    private val highestY = points.keys.maxOf { it.y }
+    val highestX = points.keys.maxOf { it.x }
+    val highestY = points.keys.maxOf { it.y }
+
+    fun point2DInGrid(point2D: Point2D) =
+        point2D.x in 0..highestX && point2D.y in 0..highestY
 
     fun toStringWithOnly(restrictedPoints: Set<Point2D>) = buildString {
         for (y in 0..highestY) {
