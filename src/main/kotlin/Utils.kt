@@ -4,6 +4,10 @@ fun readFileAsLines(name: String) = readFile(name).lines()
 
 data class Point2D(val x: Int, val y: Int)
 
+fun Point2D.surroundingPoints() = listOf(
+    copy(x = x + 1), copy(x = x - 1), copy(y = y + 1), copy(y = y - 1)
+)
+
 operator fun Point2D.plus(direction: Direction) =
     when (direction) {
         Direction.NORTH -> copy(y = y - 1)
@@ -13,6 +17,14 @@ operator fun Point2D.plus(direction: Direction) =
     }
 
 enum class Direction { NORTH, EAST, SOUTH, WEST }
+
+fun Direction.perpendicularFrom() =
+    when (this) {
+        Direction.NORTH -> listOf(Direction.WEST, Direction.EAST)
+        Direction.SOUTH -> listOf(Direction.EAST, Direction.WEST)
+        Direction.EAST -> listOf(Direction.NORTH, Direction.SOUTH)
+        Direction.WEST -> listOf(Direction.SOUTH, Direction.NORTH)
+    }
 
 fun Direction.opposite() =
     when (this) {
@@ -28,6 +40,9 @@ class Grid<T>(private val points: Map<Point2D, T>) : Map<Point2D, T> by points {
 
     fun point2DInGrid(point2D: Point2D) =
         point2D.x in 0..highestX && point2D.y in 0..highestY
+
+    fun getSurroundingPoints(point2D: Point2D) =
+        point2D.surroundingPoints().filter { point2DInGrid(it) }
 
     fun toStringWithOnly(restrictedPoints: Set<Point2D>) = buildString {
         for (y in 0..highestY) {

@@ -38,3 +38,7 @@ E
 src/main/kotlin/15.kt,0/b/0bd1de2e96643eb55594a92cfd94ca2d17445214
 E
 src/main/kotlin/16.kt,5/b/5b7de91d82cb6f70e5e343cb1b3984bb2fa3967e
+E
+src/main/kotlin/17.kt,5/b/5bf9b464e15aac469901ad0724e8efd41650365b
+E
+src/main/kotlin/18.kt,3/1/3130d98401aaa54815e1daa3ddb84ea538605ba2
