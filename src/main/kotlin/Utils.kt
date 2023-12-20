@@ -109,3 +109,5 @@ fun List<String>.transposed(): List<String> {
         }.joinToString("")
     }
 }
+
+fun String.substringBetween(a: String, b: String) = substringAfter(a).substringBefore(b)

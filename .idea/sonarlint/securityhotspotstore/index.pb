@@ -42,3 +42,5 @@ E
 src/main/kotlin/17.kt,5/b/5bf9b464e15aac469901ad0724e8efd41650365b
 E
 src/main/kotlin/18.kt,3/1/3130d98401aaa54815e1daa3ddb84ea538605ba2
+E
+src/main/kotlin/19.kt,7/4/74f89767d26d11b968cbb3c99ee54d6e77b2f2c4
