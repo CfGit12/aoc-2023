@@ -1,13 +1,25 @@
-private val input = readFileAsLines("20-sample-2.txt")
+private val input = readFileAsLines("20.txt")
 
-private fun parseInput() = input.map { line ->
-    val (left, right) = line.split(" -> ")
-    val destinations = right.split(", ")
-    when {
-        left.startsWith("%") -> FlipFlop(left.substring(1), destinations)
-        left.startsWith("&") -> Conjunction(left.substring(1), destinations)
-        else -> Broadcaster("broadcaster", destinations)
+private fun parseInput(): List<Module> {
+    val modules = input.map { line ->
+        val (left, right) = line.split(" -> ")
+        val destinations = right.split(", ")
+        when {
+            left.startsWith("%") -> FlipFlop(left.substring(1), destinations)
+            left.startsWith("&") -> Conjunction(left.substring(1), destinations)
+            else -> Broadcaster("broadcaster", destinations)
+        }
     }
+    modules.forEach { module ->
+        if (module is Conjunction) {
+            modules.forEach { otherModule ->
+                if (module.label in otherModule.destinations) {
+                    module.memory[otherModule.label] = Pulse.LOW
+                }
+            }
+        }
+    }
+    return modules
 }
 
 fun main() {
